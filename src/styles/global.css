@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+:root {
+  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono-numbers: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+html, body {
+  font-family: var(--font-sans);
+  background-color: #F4F4F4;
+}
+
+/* Utility for rendering numbers in Geist Mono */
+.num {
+  font-family: var(--font-mono-numbers);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+
+.fak-title-header {
+    font-weight: bolder;
+}

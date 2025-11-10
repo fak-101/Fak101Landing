@@ -1,0 +1,307 @@
+---
+import { getTranslations, t } from '../utils/i18n';
+import project1 from '../assets/project1.jpg';
+import project2 from '../assets/project2.jpg';
+import project3 from '../assets/project3.jpg';
+import project4 from '../assets/project4.jpg';
+import project5 from '../assets/project5.jpg';
+
+const lang = Astro.params?.lang ?? 'en';
+const translations = await getTranslations(Astro, lang);
+
+// Sample project images - replace with your actual project images
+const projects = [
+  { id: 1, isTitle: true }, // First slide with title
+  { id: 2, image: project1, alt: 'Project 1' },
+  { id: 3, image: project2, alt: 'Project 2' },
+  { id: 4, image: project3, alt: 'Project 3' },
+  { id: 5, image: project4, alt: 'Project 4' },
+  { id: 6, image: project5, alt: 'Project 5' },
+];
+
+const slides = projects.map((p: any) =>
+  p.image ? { ...p, src: typeof p.image === 'string' ? p.image : (p.image as any).src } : p
+);
+
+---
+
+<section class="projects-carousel-section py-16 px-4">
+  <div class="carousel-container">
+    <div class="carousel-wrapper">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- First slide with title -->
+        <div class="carousel-slide title-slide">
+          <div class="title-content">
+            <h2 class="carousel-title">{t(translations, 'projects.title')}</h2>
+            <p class="carousel-subtitle">{t(translations, 'projects.subtitle')}</p>
+          </div>
+        </div>
+
+        <!-- Project slides -->
+        {slides.slice(1).map((project: any) => (
+          <div class="carousel-slide project-slide">
+            <img src={project.src as string} alt={project.alt} class="project-image" />
+          </div>
+        ))}
+      </div>
+
+      <!-- Navigation arrows -->
+      <button class="carousel-arrow carousel-arrow-left" id="prevBtn" aria-label="Previous slide">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button class="carousel-arrow carousel-arrow-right" id="nextBtn" aria-label="Next slide">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-carousel-section {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 24px;
+    padding: 0 16px; /* small side padding so arrows are not flush to edges */
+    box-sizing: border-box;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 16px;
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+
+  .carousel-track::-webkit-scrollbar { display: none; }
+
+  .carousel-slide {
+    flex: 0 0 60%; /* increased ~10% bigger */
+    scroll-snap-align: center;
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Title slide */
+  .title-slide {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .title-content {
+    color: white;
+  }
+
+  .carousel-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+  }
+
+  .carousel-subtitle {
+    font-size: 1.125rem;
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  /* Project slides */
+  .project-slide {
+    background: #f5f5f5;
+    cursor: pointer;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  /* Hover zoom effect on desktop */
+  @media (hover: hover) {
+    .project-slide:hover .project-image {
+      transform: scale(1.1);
+    }
+  }
+
+  /* Navigation arrows */
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .carousel-arrow:hover {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .carousel-arrow svg {
+    color: #1a1a1a;
+  }
+
+  .carousel-arrow-left {
+    left: 14rem;
+  }
+
+  .carousel-arrow-right {
+    right: 14rem;
+  }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .carousel-slide { flex-basis: 90%; }
+
+    .carousel-track { gap: 16px; }
+
+    .carousel-title {
+      font-size: 2rem;
+    }
+
+    .carousel-subtitle {
+      font-size: 1rem;
+    }
+
+    .carousel-arrow {
+      width: 40px;
+      height: 40px;
+    }
+
+    .carousel-arrow-left {
+      left: 0.5rem;
+    }
+
+    .carousel-arrow-right {
+      right: 0.5rem;
+    }
+  }
+
+  /* Tablet styles */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .carousel-slide { flex-basis: 70%; }
+  }
+</style>
+
+<script>
+  const track = document.getElementById('carouselTrack') as HTMLElement;
+  const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement;
+  const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement;
+
+  let slides = Array.from(track.querySelectorAll('.carousel-slide')) as HTMLElement[];
+  const baseCount = slides.length;
+  let currentIndex = 0;
+
+  function getCenteredIndex(): number {
+    const trackRect = track.getBoundingClientRect();
+    const viewportCenter = trackRect.left + trackRect.width / 2;
+    let bestIdx = 0;
+    let bestDist = Infinity;
+    slides.forEach((el, i) => {
+      const r = el.getBoundingClientRect();
+      const center = r.left + r.width / 2;
+      const d = Math.abs(center - viewportCenter);
+      if (d < bestDist) {
+        bestDist = d;
+        bestIdx = i;
+      }
+    });
+    return bestIdx;
+  }
+
+  function scrollToIndex(i: number) {
+    const el = slides[i];
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+
+  function goToPrev() {
+    const i = getCenteredIndex();
+    currentIndex = i - 1;
+    scrollToIndex(currentIndex);
+  }
+
+  function goToNext() {
+    const i = getCenteredIndex();
+    currentIndex = i + 1;
+    scrollToIndex(currentIndex);
+  }
+
+  prevBtn.addEventListener('click', goToPrev);
+  nextBtn.addEventListener('click', goToNext);
+
+  track.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'ArrowRight') goToNext();
+    if (e.key === 'ArrowLeft') goToPrev();
+  });
+
+  // Infinite setup
+  (function setupInfinite() {
+    const originals = Array.from(track.querySelectorAll('.carousel-slide')) as HTMLElement[];
+    const before = document.createDocumentFragment();
+    const after = document.createDocumentFragment();
+    originals.forEach((s) => before.appendChild(s.cloneNode(true)));
+    originals.forEach((s) => after.appendChild(s.cloneNode(true)));
+    track.prepend(before);
+    track.appendChild(after);
+    slides = Array.from(track.querySelectorAll('.carousel-slide')) as HTMLElement[];
+    currentIndex = baseCount; // first original in the middle segment
+    const el = slides[currentIndex];
+    if (el) el.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+  })();
+
+  // Snap/loop management on scroll end
+  let scrollTimer: number | undefined;
+  track.addEventListener('scroll', () => {
+    if (scrollTimer) window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(() => {
+      const i = getCenteredIndex();
+      currentIndex = i;
+      const lower = baseCount;
+      const upper = baseCount * 2 - 1;
+      if (currentIndex < lower) {
+        currentIndex += baseCount;
+        const el = slides[currentIndex];
+        if (el) el.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+      } else if (currentIndex > upper) {
+        currentIndex -= baseCount;
+        const el = slides[currentIndex];
+        if (el) el.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+      }
+    }, 120);
+  });
+</script>

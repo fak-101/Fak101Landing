@@ -1,0 +1,106 @@
+ ---
+import { getTranslations, t } from '../utils/i18n';
+import aboutImg from '../assets/aboutUsImage.JPG';
+import matiasImg from '../assets/matias.jpg';
+import mariaImg from '../assets/mariarenee.jpg';
+
+const lang = Astro.params?.lang ?? 'en';
+const translations = await getTranslations(Astro, lang);
+const aboutSrc = typeof aboutImg === 'string' ? aboutImg : (aboutImg as any).src;
+const matiasSrc = typeof matiasImg === 'string' ? matiasImg : (matiasImg as any).src;
+const mariaSrc = typeof mariaImg === 'string' ? mariaImg : (mariaImg as any).src;
+// Extract number and label from a badge like "[02 About]" or "[02 Nosotros]"
+const badgeRaw: string = t(translations, 'about.badge');
+const badgeMatch = badgeRaw.match(/^\[(\d+)\s+(.+)\]$/);
+const badgeNum = badgeMatch?.[1] ?? '02';
+const badgeLabel = badgeMatch?.[2] ?? t(translations, 'header.about');
+---
+<section id="about">
+  <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <div class="rounded-2xl bg-black p-8 lg:p-12">
+      <div class="mb-6">
+        <span class="text-lg font-semibold tracking-wide text-white">[<span class="num">{badgeNum}</span> {badgeLabel}]</span>
+      </div>
+      <!-- TODO: ADD a text -->
+      <div class="mt-6 overflow-hidden rounded-xl">
+        <img
+          id="about-image"
+          src={aboutSrc as string}
+          alt={t(translations, 'header.about')}
+          class="w-full h-96 sm:h-[30rem] md:h-[36rem] object-cover filter grayscale will-change-transform transition-transform duration-300"
+        />
+      </div>
+
+      <div class="mt-10 rounded-2xl border border-white/10 bg-zinc-900/50 p-6 sm:p-8">
+        <div class="flex flex-col md:flex-row gap-8">
+          <div class="md:w-1/2">
+            <img
+              src={matiasSrc as string}
+              alt="Matias"
+              class="w-full h-80 md:h-[28rem] object-cover rounded-xl grayscale"
+            />
+          </div>
+                <!-- TODO: extract this to translation layer --> 
+          <div class="md:w-1/2 text-white">
+            <h3 class="text-3xl md:text-4xl font-bold">Matias Leal</h3>
+            <p class="text-zinc-300 mt-1">Creative Director</p>
+            <div class="mt-8 text-zinc-300 text-lg leading-relaxed">
+              <p class="text-zinc-400">We’re not a big agency — and that’s the point.</p>
+              <p class="mt-4 text-white text-2xl md:text-3xl font-semibold">We care more about meaningful work, strong partnerships, and results</p>
+              <p class="mt-2 text-zinc-400">than we do about noise.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 rounded-2xl border border-white/10 bg-zinc-900/50 p-6 sm:p-8">
+        <div class="flex flex-col md:flex-row-reverse gap-8">
+          <div class="md:w-1/2">
+            <img
+              src={mariaSrc as string}
+              alt="Maria Renee"
+              class="w-full h-80 md:h-[28rem] object-cover rounded-xl grayscale"
+            />
+          </div>
+          <div class="md:w-1/2 text-white">
+            <h3 class="text-3xl md:text-4xl font-bold">Maria Renee</h3>
+            <p class="text-zinc-300 mt-1">Strategy Lead</p>
+            <div class="mt-8 text-zinc-300 text-lg leading-relaxed">
+              <p class="text-zinc-400">Thoughtful strategy shapes exceptional outcomes.</p>
+              <p class="mt-4 text-white text-2xl md:text-3xl font-semibold">Clarity, collaboration, and measurable impact guide everything we do</p>
+              <p class="mt-2 text-zinc-400">so every project moves the needle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <slot />
+    </div>
+  </div>
+</section>
+
+<script>
+  const img = document.getElementById('about-image');
+  if (img) {
+    let ticking = false;
+    const update = () => {
+      const rect = img.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const visible = Math.max(0, Math.min(rect.bottom, vh) - Math.max(rect.top, 0));
+      const height = rect.height || img.clientHeight || 1;
+      const basis = Math.min(vh, height);
+      const ratio = basis ? visible / basis : 0; // 0..1
+      const scale = 1 + 0.20 * ratio; // up to ~6% zoom
+      img.style.transform = `scale(${scale})`;
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', update);
+  }
+</script>

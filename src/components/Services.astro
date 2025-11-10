@@ -1,0 +1,66 @@
+---
+import { getTranslations, t } from '../utils/i18n';
+
+const lang = Astro.params?.lang ?? 'en';
+const translations = await getTranslations(Astro, lang);
+// Extract number and label from a badge like "[02 Services]" or "[02 Servicios]"
+const badgeRaw: string = t(translations, 'services.badge');
+const badgeMatch = badgeRaw.match(/^\[(\d+)\s+(.+)\]$/);
+const badgeNum = badgeMatch?.[1] ?? '01';
+const badgeLabel = badgeMatch?.[2] ?? t(translations, 'header.services');
+---
+<section id="services">
+  <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <div class="mb-6">
+      <span class="text-lg font-semibold tracking-wide text-gray-900">[<span class="num">{badgeNum}</span> {badgeLabel}]</span>
+    </div>
+    <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2">
+      <div>
+        <h2 class="text-5xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-6xl md:text-7xl">
+          {t(translations, 'services.title')}
+        </h2>
+      </div>
+      <div class="flex flex-col gap-6">
+        <div class="rounded-2xl bg-white p-8 lg:p-10">
+          <div class="flex items-start gap-6">
+            <span class="num text-4xl font-semibold text-gray-400">{t(translations, 'services.card.num')}</span>
+            <h3 class="text-2xl font-bold text-gray-900">{t(translations, 'services.card.title')}</h3>
+          </div>
+          <p class="mt-6 text-sm leading-6 text-gray-500 lg:text-base">
+            {t(translations, 'services.card.desc')}
+          </p>
+        </div>
+
+        <div class="rounded-2xl bg-white p-8 lg:p-10">
+          <div class="flex items-start gap-6">
+            <span class="num text-4xl font-semibold text-gray-400">{t(translations, 'services.card2.num')}</span>
+            <h3 class="text-2xl font-bold text-gray-900">{t(translations, 'services.card2.title')}</h3>
+          </div>
+          <p class="mt-6 text-sm leading-6 text-gray-500 lg:text-base">
+            {t(translations, 'services.card2.desc')}
+          </p>
+        </div>
+
+        <div class="rounded-2xl bg-white p-8 lg:p-10">
+          <div class="flex items-start gap-6">
+            <span class="num text-4xl font-semibold text-gray-400">{t(translations, 'services.card3.num')}</span>
+            <h3 class="text-2xl font-bold text-gray-900">{t(translations, 'services.card3.title')}</h3>
+          </div>
+          <p class="mt-6 text-sm leading-6 text-gray-500 lg:text-base">
+            {t(translations, 'services.card3.desc')}
+          </p>
+        </div>
+
+        <a href={`/${lang}/contact`} class="block rounded-2xl bg-black p-8 lg:p-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black/40">
+          <div class="flex items-start gap-6">
+            <span class="num text-4xl font-semibold text-white/70">{t(translations, 'services.cta.num')}</span>
+            <h3 class="text-2xl font-bold text-white">{t(translations, 'services.cta.title')}</h3>
+          </div>
+          <p class="mt-6 text-sm leading-6 text-white/70 lg:text-base">
+            {t(translations, 'services.cta.desc')}
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

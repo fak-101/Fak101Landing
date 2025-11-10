@@ -1,0 +1,99 @@
+---
+import { getTranslations, t } from '../utils/i18n';
+
+// Get current locale from Astro params
+const lang = Astro.params?.lang ?? 'en';
+const openCmd: any = { command: 'show-modal', commandfor: 'mobile-menu' };
+const closeCmd: any = { command: 'close', commandfor: 'mobile-menu' };
+
+// Load translations
+const translations = await getTranslations(Astro, lang);
+---
+<!-- Main Header Component -->
+<header class="bg-[#F4F4F4]">
+  <!-- DESKTOP & MOBILE NAVIGATION BAR -->
+  <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+    
+    <!-- LOGO/BRAND SECTION - Visible on all screen sizes -->
+    <div class="flex lg:flex-1">
+      <a href={`/${lang}/`} class="-m-1.5 p-1.5">
+        <span class="sr-only">FAK 101</span>
+        <span class="text-2xl font-semibold tracking-tight text-[#D60606]">
+          <span class="fak-title-header">FAK</span><span class="num">•101</span>
+        </span>
+      </a>
+    </div>
+
+    <!-- MOBILE MENU BUTTON - Only visible on mobile/tablet -->
+    <div class="flex lg:hidden">
+      <button type="button" {...openCmd} class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+        <span class="sr-only">Open main menu</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-8">
+          <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- DESKTOP NAVIGATION LINKS + CTA BUTTON - Only visible on large screens -->
+    <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-x-8">
+      <a href={`/${lang}/#projects`} class="text-base font-semibold text-gray-900 hover:text-gray-700 transition-colors">{t(translations, 'header.projects')}</a>
+      <a href={`/${lang}/#services`} class="text-base font-semibold text-gray-900 hover:text-gray-700 transition-colors">{t(translations, 'header.services')}</a>
+      <a href={`/${lang}/#about`} class="text-base font-semibold text-gray-900 hover:text-gray-700 transition-colors">{t(translations, 'header.about')}</a>
+      <a href={`/${lang}/contact`} class="inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 text-base font-semibold text-white shadow-sm hover:opacity-90 transition">
+        <span class="inline-block h-2 w-2 rounded-full" style="background-color:#D60606"></span>
+        <span>{t(translations, 'header.contact')}</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- MOBILE SIDE MENU - Slides in from right on mobile/tablet only -->
+  <el-dialog>
+    <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
+      <div tabindex="0" class="fixed inset-0 focus:outline-none">
+        <el-dialog-panel class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          
+          <!-- MOBILE MENU HEADER - Logo and close button -->
+          <div class="flex items-center justify-between">
+            <!-- SAME LOGO AS DESKTOP - Consistent branding -->
+            <a href={`/${lang}/`} class="-m-1.5 p-1.5">
+              <span class="sr-only">FAK 101</span>
+              <span class="text-2xl font-semibold tracking-tight text-[#D60606]">
+                <span class="fak-title-header">FAK</span><span class="num">•101</span>
+              </span>
+            </a>
+            <!-- CLOSE BUTTON -->
+            <button type="button" {...closeCmd} class="-m-2.5 rounded-md p-2.5 text-gray-700">
+              <span class="sr-only">Close menu</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
+                <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- MOBILE MENU CONTENT - Navigation links and CTA -->
+          <div class="mt-6 flow-root">
+            <div class="-my-6">
+              
+              <!-- MOBILE NAVIGATION LINKS -->
+              <div class="space-y-2 py-6 text-right">
+                <a href={`/${lang}/#projects`} class="block rounded-lg px-3 py-2 text-lg/7 font-semibold text-gray-900 hover:bg-gray-50">{t(translations, 'header.projects')}</a>
+                <a href={`/${lang}/#services`} class="block rounded-lg px-3 py-2 text-lg/7 font-semibold text-gray-900 hover:bg-gray-50">{t(translations, 'header.services')}</a>
+                <a href={`/${lang}/#about`} class="block rounded-lg px-3 py-2 text-lg/7 font-semibold text-gray-900 hover:bg-gray-50">{t(translations, 'header.about')}</a>
+              </div>
+
+              <!-- MOBILE CTA BUTTON -->
+              <div class="py-6 text-right">
+                <a href={`/${lang}/contact`} class="inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 text-lg/7 font-semibold text-white shadow-sm hover:opacity-90">
+                  <span class="inline-block h-2 w-2 rounded-full" style="background-color:#D60606"></span>
+                  <span>{t(translations, 'header.contact')}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </el-dialog-panel>
+      </div>
+    </dialog>
+  </el-dialog>
+</header>
+
+

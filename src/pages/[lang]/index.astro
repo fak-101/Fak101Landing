@@ -1,0 +1,33 @@
+---
+import BrandName from '../../components/BrandName.astro';
+import Header from '../../components/Header.astro';
+import ProjectsCarrousel from '../../components/ProjectsCarrousel.astro';
+import Services from '../../components/Services.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import Layout from '../../layouts/Layout.astro';
+import AboutUs from '../../components/AboutUs.astro';
+import Footer from '../../components/Footer.astro';
+export const prerender = true;
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } },
+  ];
+}
+---
+
+<Layout>
+	<Header />
+	<BrandName />
+	<section id="projects">
+		<ProjectsCarrousel />
+	</section>
+	<section id="services">
+		<Services />
+	</section>
+	<section id="about">
+		<AboutUs />
+	</section>
+	<Testimonials />
+	<Footer />
+</Layout>

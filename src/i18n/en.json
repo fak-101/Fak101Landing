@@ -1,0 +1,52 @@
+{
+  "header": {
+    "projects": "Projects",
+    "services": "Services", 
+    "about": "About",
+    "contact": "Get in Touch"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "We will get back to you soon."
+  },
+  "brand": {
+    "name": "FAK 101",
+    "stats": {
+      "projects": { "value": "99+", "label": "Completed Projects" },
+      "years": { "value": "5+", "label": "Years of Experience" },
+      "clients": { "value": "100%", "label": "Happy Clients" }
+    },
+    "blurb": "We craft memorable brands, design and develop stunning websites, optimize your presence through strategic SEO, and amplify your impact with results-driven digital marketing."
+  },
+  "projects": {
+    "title": "Our Work",
+    "subtitle": "Click to see more"
+  },
+  "about": {
+    "badge": "[02 About]"
+  },
+  "services": {
+    "badge": "[01 Services] ",
+    "title": "No guesswork, just a clear path from ideas → results.",
+    "card": {
+      "num": "01",
+      "title": "Discovery",
+      "desc": "Deep understanding of your business, forming the foundation for an impactful strategy."
+    },
+    "card2": {
+      "num": "02",
+      "title": "Design",
+      "desc": "Crafting innovative concepts and user-focused designs that effectively speak to your audience."
+    },
+    "card3": {
+      "num": "03",
+      "title": "Development",
+      "desc": "Turning ideas into projects, built with precision, delivered on time, and fully optimized for results."
+    },
+    "cta": {
+      "num": "04",
+      "title": "Contact Us",
+      "desc": "Have a vision? Let’s make a plan. Reach out and take the first step toward something great."
+    }
+  }
+}
