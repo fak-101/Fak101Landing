@@ -8,6 +8,7 @@
 html, body {
   font-family: var(--font-sans);
   background-color: #F4F4F4;
+  scroll-behavior: smooth;
 }
 
 /* Utility for rendering numbers in Geist Mono */
@@ -16,7 +17,243 @@ html, body {
   font-variant-numeric: tabular-nums lining-nums;
 }
 
-
 .fak-title-header {
     font-weight: bolder;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Animation utility classes */
+.animate-out {
+  opacity: 0;
+}
+
+[data-animate="fadeIn"] {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+[data-animate="fadeInUp"] {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+[data-animate="fadeInDown"] {
+  animation: fadeInDown 0.8s ease-out forwards;
+}
+
+[data-animate="fadeInLeft"] {
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+[data-animate="fadeInRight"] {
+  animation: fadeInRight 0.8s ease-out forwards;
+}
+
+[data-animate="scaleIn"] {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+[data-animate="slideInRight"] {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+[data-animate="slideInLeft"] {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+[data-animate="rotateIn"] {
+  animation: rotateIn 0.8s ease-out forwards;
+}
+
+/* Hover animations */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(214, 6, 6, 0.4);
+}
+
+/* Stagger animation support */
+[data-stagger-item] {
+  opacity: 0;
+}
+
+[data-stagger-item].animate-in {
+  opacity: 1;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced button animations */
+button:not(:disabled) {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:not(:disabled):active {
+  transform: scale(0.95);
+}
+
+/* Image loading animations */
+img {
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, input, textarea, select {
+  transition: all 0.2s ease;
+}
+
+/* Focus visible animations */
+*:focus-visible {
+  outline: 2px solid rgba(214, 6, 6, 0.5);
+  outline-offset: 2px;
+  transition: outline-offset 0.2s ease;
 }

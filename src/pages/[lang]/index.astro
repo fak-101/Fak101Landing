@@ -1,6 +1,7 @@
 ---
 import BrandName from '../../components/BrandName.astro';
 import Header from '../../components/Header.astro';
+import OurApproach from '../../components/OurApproach.astro';
 import ProjectsCarrousel from '../../components/ProjectsCarrousel.astro';
 import Services from '../../components/Services.astro';
 import Testimonials from '../../components/Testimonials.astro';
@@ -19,14 +20,17 @@ export function getStaticPaths() {
 <Layout>
 	<Header />
 	<BrandName />
-	<section id="projects">
-		<ProjectsCarrousel />
+	<section id="about">
+		<AboutUs />
 	</section>
 	<section id="services">
 		<Services />
 	</section>
-	<section id="about">
-		<AboutUs />
+	<section id="approach">
+		<OurApproach />
+	</section>
+	<section id="projects">
+		<ProjectsCarrousel />
 	</section>
 	<Testimonials />
 	<Footer />

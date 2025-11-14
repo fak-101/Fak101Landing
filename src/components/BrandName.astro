@@ -4,33 +4,33 @@ import { getTranslations, t } from '../utils/i18n';
 const lang = Astro.params?.lang ?? 'en';
 const translations = await getTranslations(Astro, lang);
 ---
-
-<div class="text-right leading-none mx-auto w-fit">
-  <div class="fak-title-header text-7xl sm:text-8xl md:text-9xl">FAK</div>
-  <div class="num text-7xl sm:text-8xl md:text-9xl">•101</div>
-</div>
-
-<section class="mt-10 w-full">
-  <div class="mx-auto max-w-6xl px-4">
+<section class="mt-0 w-full min-h-screen flex flex-col justify-center">
+  <div class="mx-auto max-w-6xl px-4 w-full">
+    <!-- Title -->
+    <h1 class="text-8xl md:text-9xl font-bold mb-32 md:mb-40 leading-none" data-animate="fadeInLeft">
+      <span style="font-family: var(--font-sans)">FAK</span>
+      <span class="num"> 101</span>
+    </h1>
+    
     <div class="grid gap-8 md:grid-cols-2 md:items-center">
       <!-- Blurb -->
-      <div class="order-1 md:order-2 text-gray-700 leading-relaxed">
+      <div class="order-1 md:order-2 text-gray-700 leading-relaxed" data-animate="fadeInRight" data-stagger-item>
         {t(translations, 'brand.blurb')}
       </div>
 
       <!-- Stats -->
-      <div class="order-2 md:order-1 grid grid-cols-1 gap-6 sm:grid-cols-3">
-        <div class="flex items-baseline justify-between sm:block">
-          <div class="text-5xl sm:text-4xl font-extrabold tracking-tight">{t(translations, 'brand.stats.projects.value')}</div>
-          <div class="ml-4 sm:ml-0 sm:mt-1 text-base sm:text-sm text-gray-600">{t(translations, 'brand.stats.projects.label')}</div>
+      <div class="order-2 md:order-1 grid grid-cols-1 gap-6 sm:grid-cols-3" data-stagger>
+        <div class="flex items-baseline justify-between sm:block" data-stagger-item data-animate="fadeInUp">
+          <div class="num text-5xl sm:text-4xl font-semibold tracking-tight" data-counter data-counter-duration="2000">{t(translations, 'brand.stats.team.value')}</div>
+          <div class="ml-4 sm:ml-0 sm:mt-1 text-base sm:text-sm text-gray-600">{t(translations, 'brand.stats.team.label')}</div>
         </div>
-        <div class="flex items-baseline justify-between sm:block">
-          <div class="text-5xl sm:text-4xl font-extrabold tracking-tight">{t(translations, 'brand.stats.years.value')}</div>
+        <div class="flex items-baseline justify-between sm:block" data-stagger-item data-animate="fadeInUp">
+          <div class="num text-5xl sm:text-4xl font-semibold tracking-tight" data-counter data-counter-duration="800">{t(translations, 'brand.stats.years.value')}</div>
           <div class="ml-4 sm:ml-0 sm:mt-1 text-base sm:text-sm text-gray-600">{t(translations, 'brand.stats.years.label')}</div>
         </div>
-        <div class="flex items-baseline justify-between sm:block">
-          <div class="text-5xl sm:text-4xl font-extrabold tracking-tight">{t(translations, 'brand.stats.clients.value')}</div>
-          <div class="ml-4 sm:ml-0 sm:mt-1 text-base sm:text-sm text-gray-600">{t(translations, 'brand.stats.clients.label')}</div>
+        <div class="flex items-baseline justify-between sm:block" data-stagger-item data-animate="fadeInUp">
+          <div class="num text-5xl sm:text-4xl font-semibold tracking-tight" data-counter data-counter-duration="2000">{t(translations, 'brand.stats.dedication.value')}</div>
+          <div class="ml-4 sm:ml-0 sm:mt-1 text-base sm:text-sm text-gray-600">{t(translations, 'brand.stats.dedication.label')}</div>
         </div>
       </div>
     </div>

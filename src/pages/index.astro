@@ -1,9 +1,0 @@
----
-export const prerender = false;
-// Auto-detect language from browser and redirect
-const acceptLanguage = Astro.request.headers.get('accept-language') || 'en';
-const preferredLocale = new Intl.Locale(acceptLanguage).language || 'en';
-const supportedLang = ['en', 'es'].includes(preferredLocale) ? preferredLocale : 'en';
-return Astro.redirect(`/${supportedLang}/`, 302);
----
-

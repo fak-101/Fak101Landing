@@ -1,8 +1,9 @@
 {
   "header": {
-    "projects": "Projects",
     "services": "Services", 
     "about": "About",
+    "approach": "Our Approach",
+    "projects": "Projects",
     "contact": "Get in Touch"
   },
   "contact": {
@@ -12,21 +13,39 @@
   "brand": {
     "name": "FAK 101",
     "stats": {
-      "projects": { "value": "99+", "label": "Completed Projects" },
+      "team": { "value": "2", "label": "Minds, One Vision" },
       "years": { "value": "5+", "label": "Years of Experience" },
-      "clients": { "value": "100%", "label": "Happy Clients" }
+      "dedication": { "value": "100%", "label": "Focused" }
     },
     "blurb": "We craft memorable brands, design and develop stunning websites, optimize your presence through strategic SEO, and amplify your impact with results-driven digital marketing."
   },
-  "projects": {
-    "title": "Our Work",
-    "subtitle": "Click to see more"
-  },
   "about": {
-    "badge": "[02 About]"
+    "badge": "[01 About]",
+    "title": "We're a small team with big ambitions.",
+    "intro": "We're not a big agency — and that's the point. We're two creative minds who care more about meaningful work, strong partnerships, and results than we do about noise. Every project gets our full attention, every client becomes a partner, and every outcome matters."
+  },
+  "approach": {
+    "badge": "[03 Our Approach]",
+    "title": "How we work",
+    "subtitle": "A clear, collaborative process that turns your vision into reality.",
+    "step1": {
+      "num": "01",
+      "title": "Listen & Learn",
+      "desc": "We start by understanding your business, goals, and challenges. No assumptions, just deep listening."
+    },
+    "step2": {
+      "num": "02",
+      "title": "Design & Develop",
+      "desc": "We craft solutions that are both beautiful and functional, always with your audience in mind."
+    },
+    "step3": {
+      "num": "03",
+      "title": "Launch & Grow",
+      "desc": "We don't just deliver and disappear. We're here to help you grow and iterate based on real results."
+    }
   },
   "services": {
-    "badge": "[01 Services] ",
+    "badge": "[02 Services] ",
     "title": "No guesswork, just a clear path from ideas → results.",
     "card": {
       "num": "01",
@@ -46,7 +65,14 @@
     "cta": {
       "num": "04",
       "title": "Contact Us",
-      "desc": "Have a vision? Let’s make a plan. Reach out and take the first step toward something great."
+      "desc": "Have a vision? Let's make a plan. Reach out and take the first step toward something great."
     }
+  },
+  "footer": {
+    "copyright": "2025©All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "email": "Email",
+    "phone": "Phone"
   }
 }

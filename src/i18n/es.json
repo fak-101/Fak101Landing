@@ -1,8 +1,9 @@
 {
   "header": {
-    "projects": "Projectos",
     "services": "Servicios",
-    "about": "Nosotros", 
+    "about": "Nosotros",
+    "approach": "Nuestro Enfoque",
+    "projects": "Proyectos", 
     "contact": "Contactanos"
   },
   "contact": {
@@ -12,21 +13,39 @@
   "brand": {
     "name": "FAK 101",
     "stats": {
-      "projects": { "value": "99+", "label": "Proyectos Completados" },
+      "team": { "value": "2", "label": "Mentes, Una Visión" },
       "years": { "value": "5+", "label": "Años de Experiencia" },
-      "clients": { "value": "100%", "label": "Clientes Satisfechos" }
+      "dedication": { "value": "100%", "label": "Enfocados" }
     },
     "blurb": "Creamos marcas memorables, diseñamos y desarrollamos sitios web, optimizamos tu presencia con SEO estratégico y amplificamos tu impacto con marketing digital orientado a resultados."
   },
-  "projects": {
-    "title": "Nuestros Trabajos",
-    "subtitle": "Click para ver más"
+  "approach": {
+    "badge": "[03 Nuestro Enfoque]",
+    "title": "Cómo trabajamos",
+    "subtitle": "Un proceso claro y colaborativo que convierte tu visión en realidad.",
+    "step1": {
+      "num": "01",
+      "title": "Escuchar y Aprender",
+      "desc": "Comenzamos entendiendo tu negocio, objetivos y desafíos. Sin suposiciones, solo escucha profunda."
+    },
+    "step2": {
+      "num": "02",
+      "title": "Diseñar y Desarrollar",
+      "desc": "Creamos soluciones que son tanto hermosas como funcionales, siempre con tu audiencia en mente."
+    },
+    "step3": {
+      "num": "03",
+      "title": "Lanzar y Crecer",
+      "desc": "No solo entregamos y desaparecemos. Estamos aquí para ayudarte a crecer e iterar basándonos en resultados reales."
+    }
   },
   "about": {
-    "badge": "[02 Nosotros]"
+    "badge": "[01 Nosotros]",
+    "title": "Somos un equipo pequeño con grandes ambiciones.",
+    "intro": "No somos una agencia grande — y ese es el punto. Somos dos mentes creativas que se preocupan más por el trabajo significativo, las asociaciones sólidas y los resultados que por el ruido. Cada proyecto recibe toda nuestra atención, cada cliente se convierte en un socio, y cada resultado importa."
   },
   "services": {
-    "badge": "[01 Servicios]",
+    "badge": "[02 Servicios]",
     "title": "Sin adivinanzas, solo un camino claro de ideas → resultados.",
     "card": {
       "num": "01",
@@ -48,5 +67,12 @@
       "title": "Contáctanos",
       "desc": "¿Tienes una visión? Hagamos un plan. Da el primer paso hacia algo grandioso."
     }
+  },
+  "footer": {
+    "copyright": "2025©Todos los derechos reservados.",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "email": "Correo",
+    "phone": "Teléfono"
   }
 }

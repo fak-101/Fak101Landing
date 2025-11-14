@@ -31,6 +31,8 @@ const slides = projects.map((p: any) =>
       <div class="carousel-track" id="carouselTrack">
         <!-- First slide with title -->
         <div class="carousel-slide title-slide">
+          <img src={project1.src as string} alt="Our Work" class="title-image" />
+          <div class="title-overlay"></div>
           <div class="title-content">
             <h2 class="carousel-title">{t(translations, 'projects.title')}</h2>
             <p class="carousel-subtitle">{t(translations, 'projects.subtitle')}</p>
@@ -46,12 +48,12 @@ const slides = projects.map((p: any) =>
       </div>
 
       <!-- Navigation arrows -->
-      <button class="carousel-arrow carousel-arrow-left" id="prevBtn" aria-label="Previous slide">
+      <button class="carousel-arrow carousel-arrow-left hover-lift" id="prevBtn" aria-label="Previous slide">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </button>
-      <button class="carousel-arrow carousel-arrow-right" id="nextBtn" aria-label="Next slide">
+      <button class="carousel-arrow carousel-arrow-right hover-lift" id="nextBtn" aria-label="Next slide">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
@@ -102,16 +104,38 @@ const slides = projects.map((p: any) =>
 
   /* Title slide */
   .title-slide {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 2rem;
+    cursor: pointer;
+  }
+
+  .title-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .title-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.7) 0%, rgba(45, 45, 45, 0.7) 100%);
+    z-index: 1;
   }
 
   .title-content {
     color: white;
+    position: relative;
+    z-index: 2;
   }
 
   .carousel-title {
@@ -137,12 +161,15 @@ const slides = projects.map((p: any) =>
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Hover zoom effect on desktop */
   @media (hover: hover) {
     .project-slide:hover .project-image {
+      transform: scale(1.1);
+    }
+    .title-slide:hover .title-image {
       transform: scale(1.1);
     }
   }
@@ -162,13 +189,18 @@ const slides = projects.map((p: any) =>
     justify-content: center;
     cursor: pointer;
     z-index: 10;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   .carousel-arrow:hover {
     background: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .carousel-arrow:active {
+    transform: translateY(-50%) scale(0.95);
   }
 
   .carousel-arrow svg {
@@ -218,90 +250,153 @@ const slides = projects.map((p: any) =>
 </style>
 
 <script>
-  const track = document.getElementById('carouselTrack') as HTMLElement;
-  const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement;
-  const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement;
+  // Wait for DOM to be ready and carousel to be in viewport before initializing
+  function initCarousel() {
+    const track = document.getElementById('carouselTrack') as HTMLElement;
+    const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement;
+    const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement;
 
-  let slides = Array.from(track.querySelectorAll('.carousel-slide')) as HTMLElement[];
-  const baseCount = slides.length;
-  let currentIndex = 0;
+    // Check if elements exist before proceeding
+    if (!track || !prevBtn || !nextBtn) {
+      return;
+    }
 
-  function getCenteredIndex(): number {
-    const trackRect = track.getBoundingClientRect();
-    const viewportCenter = trackRect.left + trackRect.width / 2;
-    let bestIdx = 0;
-    let bestDist = Infinity;
-    slides.forEach((el, i) => {
-      const r = el.getBoundingClientRect();
-      const center = r.left + r.width / 2;
-      const d = Math.abs(center - viewportCenter);
-      if (d < bestDist) {
-        bestDist = d;
-        bestIdx = i;
-      }
-    });
-    return bestIdx;
-  }
+    let slides = Array.from(track.querySelectorAll('.carousel-slide')) as HTMLElement[];
+    const baseCount = slides.length;
+    
+    if (baseCount === 0) {
+      return;
+    }
 
-  function scrollToIndex(i: number) {
-    const el = slides[i];
-    if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-  }
+    let currentIndex = 0;
+    let isInitialized = false;
 
-  function goToPrev() {
-    const i = getCenteredIndex();
-    currentIndex = i - 1;
-    scrollToIndex(currentIndex);
-  }
+    function getCenteredIndex(): number {
+      const trackRect = track.getBoundingClientRect();
+      const viewportCenter = trackRect.left + trackRect.width / 2;
+      let bestIdx = 0;
+      let bestDist = Infinity;
+      slides.forEach((el, i) => {
+        const r = el.getBoundingClientRect();
+        const center = r.left + r.width / 2;
+        const d = Math.abs(center - viewportCenter);
+        if (d < bestDist) {
+          bestDist = d;
+          bestIdx = i;
+        }
+      });
+      return bestIdx;
+    }
 
-  function goToNext() {
-    const i = getCenteredIndex();
-    currentIndex = i + 1;
-    scrollToIndex(currentIndex);
-  }
+    function scrollToIndex(i: number) {
+      const el = slides[i];
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
 
-  prevBtn.addEventListener('click', goToPrev);
-  nextBtn.addEventListener('click', goToNext);
-
-  track.addEventListener('keydown', (e: KeyboardEvent) => {
-    if (e.key === 'ArrowRight') goToNext();
-    if (e.key === 'ArrowLeft') goToPrev();
-  });
-
-  // Infinite setup
-  (function setupInfinite() {
-    const originals = Array.from(track.querySelectorAll('.carousel-slide')) as HTMLElement[];
-    const before = document.createDocumentFragment();
-    const after = document.createDocumentFragment();
-    originals.forEach((s) => before.appendChild(s.cloneNode(true)));
-    originals.forEach((s) => after.appendChild(s.cloneNode(true)));
-    track.prepend(before);
-    track.appendChild(after);
-    slides = Array.from(track.querySelectorAll('.carousel-slide')) as HTMLElement[];
-    currentIndex = baseCount; // first original in the middle segment
-    const el = slides[currentIndex];
-    if (el) el.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
-  })();
-
-  // Snap/loop management on scroll end
-  let scrollTimer: number | undefined;
-  track.addEventListener('scroll', () => {
-    if (scrollTimer) window.clearTimeout(scrollTimer);
-    scrollTimer = window.setTimeout(() => {
+    function goToPrev() {
       const i = getCenteredIndex();
-      currentIndex = i;
-      const lower = baseCount;
-      const upper = baseCount * 2 - 1;
-      if (currentIndex < lower) {
-        currentIndex += baseCount;
-        const el = slides[currentIndex];
-        if (el) el.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
-      } else if (currentIndex > upper) {
-        currentIndex -= baseCount;
-        const el = slides[currentIndex];
-        if (el) el.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
-      }
-    }, 120);
-  });
+      currentIndex = i - 1;
+      scrollToIndex(currentIndex);
+    }
+
+    function goToNext() {
+      const i = getCenteredIndex();
+      currentIndex = i + 1;
+      scrollToIndex(currentIndex);
+    }
+
+    prevBtn.addEventListener('click', goToPrev);
+    nextBtn.addEventListener('click', goToNext);
+
+    track.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') goToNext();
+      if (e.key === 'ArrowLeft') goToPrev();
+    });
+
+    // Initialize infinite scroll only when carousel comes into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !isInitialized) {
+          isInitialized = true;
+          
+          // Delay infinite setup to avoid blocking
+          setTimeout(() => {
+            const originals = Array.from(track.querySelectorAll('.carousel-slide')) as HTMLElement[];
+            if (originals.length === 0) return;
+            
+            const before = document.createDocumentFragment();
+            const after = document.createDocumentFragment();
+            originals.forEach((s) => before.appendChild(s.cloneNode(true)));
+            originals.forEach((s) => after.appendChild(s.cloneNode(true)));
+            track.prepend(before);
+            track.appendChild(after);
+            slides = Array.from(track.querySelectorAll('.carousel-slide')) as HTMLElement[];
+            currentIndex = baseCount; // first original in the middle segment
+            
+            // Don't scroll into view - let it stay at natural position
+            observer.disconnect();
+          }, 200);
+        }
+      });
+    }, {
+      rootMargin: '100px' // Start loading when carousel is 100px away from viewport
+    });
+
+    observer.observe(track);
+
+    // Snap/loop management on scroll end
+    let scrollTimer: number | undefined;
+    track.addEventListener('scroll', () => {
+      if (!isInitialized) return; // Don't handle scroll until initialized
+      
+      if (scrollTimer) window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => {
+        const i = getCenteredIndex();
+        currentIndex = i;
+        const lower = baseCount;
+        const upper = baseCount * 2 - 1;
+        if (currentIndex < lower) {
+          currentIndex += baseCount;
+          const el = slides[currentIndex];
+          if (el) {
+            requestAnimationFrame(() => {
+              el.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+            });
+          }
+        } else if (currentIndex > upper) {
+          currentIndex -= baseCount;
+          const el = slides[currentIndex];
+          if (el) {
+            requestAnimationFrame(() => {
+              el.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+            });
+          }
+        }
+      }, 120);
+    });
+  }
+
+  // Initialize when DOM is ready and page is fully loaded
+  function startInit() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        // Wait for page to be fully interactive
+        if (document.readyState === 'complete') {
+          initCarousel();
+        } else {
+          window.addEventListener('load', initCarousel, { once: true });
+        }
+      });
+    } else if (document.readyState === 'complete') {
+      // Page already loaded, wait a bit to ensure everything is settled
+      setTimeout(initCarousel, 50);
+    } else {
+      window.addEventListener('load', () => {
+        setTimeout(initCarousel, 50);
+      }, { once: true });
+    }
+  }
+
+  startInit();
 </script>

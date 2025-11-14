@@ -1,0 +1,64 @@
+---
+import { getTranslations, t } from '../utils/i18n';
+
+const lang = Astro.params?.lang ?? 'en';
+const translations = await getTranslations(Astro, lang);
+
+// Extract number and label from a badge like "[03 Our Approach]" or "[03 Nuestro Enfoque]"
+const badgeRaw: string = t(translations, 'approach.badge');
+const badgeMatch = badgeRaw.match(/^\[(\d+)\s+(.+)\]$/);
+const badgeNum = badgeMatch?.[1] ?? '03';
+const badgeLabel = badgeMatch?.[2] ?? t(translations, 'header.approach');
+
+const approachSteps = [
+  {
+    num: t(translations, 'approach.step1.num'),
+    title: t(translations, 'approach.step1.title'),
+    desc: t(translations, 'approach.step1.desc'),
+  },
+  {
+    num: t(translations, 'approach.step2.num'),
+    title: t(translations, 'approach.step2.title'),
+    desc: t(translations, 'approach.step2.desc'),
+  },
+  {
+    num: t(translations, 'approach.step3.num'),
+    title: t(translations, 'approach.step3.title'),
+    desc: t(translations, 'approach.step3.desc'),
+  },
+];
+---
+
+<section id="approach" class="py-16 px-4">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mb-12" data-animate="fadeInDown">
+      <span class="text-lg font-semibold tracking-wide text-gray-900" style="font-family: var(--font-mono-numbers);">[<span class="num">{badgeNum}</span> {badgeLabel}]</span>
+    </div>
+    
+    <div class="mb-12" data-animate="fadeInLeft">
+      <h2 class="text-5xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-6xl md:text-7xl">
+        {t(translations, 'approach.title')}
+      </h2>
+      <p class="mt-6 text-lg text-gray-600 max-w-3xl">
+        {t(translations, 'approach.subtitle')}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-3" data-stagger>
+      {approachSteps.map((step, index) => (
+        <div
+          class="rounded-2xl border border-gray-200 bg-white p-8 hover-lift transition-all"
+          data-stagger-item
+          data-animate="fadeInUp"
+        >
+          <div class="mb-6">
+            <span class="num text-5xl font-bold text-gray-300">{step.num}</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">{step.title}</h3>
+          <p class="text-gray-600 leading-relaxed">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+

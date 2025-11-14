@@ -1,0 +1,53 @@
+---
+import { getTranslations, t } from '../utils/i18n';
+
+// Get current locale from Astro params
+const lang = Astro.params?.lang ?? 'en';
+
+// Load translations
+const translations = await getTranslations(Astro, lang);
+---
+
+<footer class="bg-[#0C0C0D] text-gray-300">
+  <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between" data-stagger>
+      <!-- Left Side: Logo, Copyright, Legal Links -->
+      <div class="flex flex-col gap-4" data-stagger-item data-animate="fadeInUp">
+        <!-- Logo -->
+        <div>
+          <a href={`/${lang}/`} class="inline-block hover-scale">
+            <span class="sr-only">FAK 101</span>
+            <span class="text-2xl font-bold text-white">
+              <span class="fak-title-header">FAK</span><span class="num">•101</span>
+            </span>
+          </a>
+        </div>
+        
+        <!-- Copyright -->
+        <p class="text-sm text-gray-400">
+          {t(translations, 'footer.copyright')}
+        </p>
+      </div>
+      
+      <!-- Right Side: Contact Information -->
+      <div class="flex flex-col gap-6 sm:flex-row sm:gap-12" data-stagger>
+        <!-- Email -->
+        <div data-stagger-item data-animate="fadeInUp">
+          <p class="text-xs text-gray-400 mb-1">{t(translations, 'footer.email')}</p>
+          <a href="mailto:mati.lebaz@gmail.com" class="text-base text-white hover:text-gray-300 transition-colors hover-scale">
+            mati.lebaz@gmail.com
+          </a>
+        </div>
+        
+        <!-- Phone -->
+        <div data-stagger-item data-animate="fadeInUp">
+          <p class="text-xs text-gray-400 mb-1">{t(translations, 'footer.phone')}</p>
+          <a href="tel:+34683501622" class="text-base text-white hover:text-gray-300 transition-colors hover-scale">
+            +34 683 501 622
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
