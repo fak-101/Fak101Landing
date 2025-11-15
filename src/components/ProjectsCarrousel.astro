@@ -12,11 +12,11 @@ const translations = await getTranslations(Astro, lang);
 // Sample project images - replace with your actual project images
 const projects = [
   { id: 1, isTitle: true }, // First slide with title
-  { id: 2, image: project1, alt: 'Project 1' },
-  { id: 3, image: project2, alt: 'Project 2' },
-  { id: 4, image: project3, alt: 'Project 3' },
-  { id: 5, image: project4, alt: 'Project 4' },
-  { id: 6, image: project5, alt: 'Project 5' },
+  { id: 2, image: project1, alt: `${t(translations, 'projects.alt.project')} 1` },
+  { id: 3, image: project2, alt: `${t(translations, 'projects.alt.project')} 2` },
+  { id: 4, image: project3, alt: `${t(translations, 'projects.alt.project')} 3` },
+  { id: 5, image: project4, alt: `${t(translations, 'projects.alt.project')} 4` },
+  { id: 6, image: project5, alt: `${t(translations, 'projects.alt.project')} 5` },
 ];
 
 const slides = projects.map((p: any) =>
@@ -31,7 +31,7 @@ const slides = projects.map((p: any) =>
       <div class="carousel-track" id="carouselTrack">
         <!-- First slide with title -->
         <div class="carousel-slide title-slide">
-          <img src={project1.src as string} alt="Our Work" class="title-image" />
+          <img src={project1.src as string} alt={t(translations, 'projects.alt.ourWork')} class="title-image" />
           <div class="title-overlay"></div>
           <div class="title-content">
             <h2 class="carousel-title">{t(translations, 'projects.title')}</h2>
@@ -48,12 +48,12 @@ const slides = projects.map((p: any) =>
       </div>
 
       <!-- Navigation arrows -->
-      <button class="carousel-arrow carousel-arrow-left hover-lift" id="prevBtn" aria-label="Previous slide">
+      <button class="carousel-arrow carousel-arrow-left hover-lift" id="prevBtn" aria-label={t(translations, 'projects.aria.previousSlide')}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </button>
-      <button class="carousel-arrow carousel-arrow-right hover-lift" id="nextBtn" aria-label="Next slide">
+      <button class="carousel-arrow carousel-arrow-right hover-lift" id="nextBtn" aria-label={t(translations, 'projects.aria.nextSlide')}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>

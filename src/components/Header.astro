@@ -15,7 +15,7 @@ const translations = await getTranslations(Astro, lang);
     <!-- LOGO/BRAND SECTION - Visible on all screen sizes -->
     <div class="flex lg:flex-1">
       <a href={`/${lang}/`} class="-m-1.5 p-1.5 hover-scale" data-animate="fadeInLeft">
-        <span class="sr-only">FAK 101</span>
+        <span class="sr-only">{t(translations, 'meta.brandName')}</span>
         <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#D60606] flex items-center justify-center"></div>
       </a>
     </div>

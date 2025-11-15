@@ -74,5 +74,43 @@
     "terms": "Terms",
     "email": "Email",
     "phone": "Phone"
+  },
+  "projects": {
+    "title": "Our Work",
+    "subtitle": "A showcase of projects we're proud of.",
+    "alt": {
+      "ourWork": "Our Work",
+      "project": "Project"
+    },
+    "aria": {
+      "previousSlide": "Previous slide",
+      "nextSlide": "Next slide"
+    }
+  },
+  "team": {
+    "matias": {
+      "name": "Matias Leal Bazterrica",
+      "title": "Sr. Backend Engineer",
+      "tagline": "Building systems that scale.",
+      "description": "Passionate about high-performance architectures and solving complex technical challenges",
+      "bio": "Specialized in designing robust systems that power innovative products and deliver exceptional user experiences.",
+      "alt": "Matias Leal Bazterrica"
+    },
+    "maria": {
+      "name": "María Renee Montano Torrico",
+      "title": "Frontend Engineer",
+      "tagline": "Building interfaces that connect.",
+      "description": "Focused on modern web technologies, scalable architectures, and delivering exceptional user experiences",
+      "bio": "Specialized in frontend development with expertise in building responsive, performant applications and implementing best practices in modern web development.",
+      "alt": "María Renee Montano Torrico"
+    },
+    "social": {
+      "linkedin": "LinkedIn Profile",
+      "twitter": "X (Twitter) Profile"
+    }
+  },
+  "meta": {
+    "pageTitle": "FAK•101",
+    "brandName": "FAK 101"
   }
 }

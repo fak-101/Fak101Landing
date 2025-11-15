@@ -16,7 +16,7 @@ const translations = await getTranslations(Astro, lang);
         <!-- Logo -->
         <div>
           <a href={`/${lang}/`} class="inline-block hover-scale">
-            <span class="sr-only">FAK 101</span>
+            <span class="sr-only">{t(translations, 'meta.brandName')}</span>
             <span class="text-2xl font-bold text-white">
               <span class="fak-title-header">FAK</span><span class="num">•101</span>
             </span>

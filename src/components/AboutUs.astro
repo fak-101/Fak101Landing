@@ -43,26 +43,25 @@ const badgeLabel = badgeMatch?.[2] ?? t(translations, 'header.about');
           <div class="md:w-1/2" data-animate="fadeInLeft">
             <img
               src={matiasSrc as string}
-              alt="Matias"
+              alt={t(translations, 'team.matias.alt')}
               class="w-full h-80 md:h-[28rem] object-cover rounded-xl grayscale transition-transform duration-300 hover-scale"
             />
           </div>
-                <!-- TODO: extract this to translation layer --> 
           <div class="md:w-1/2 text-white relative flex flex-col" data-animate="fadeInRight">
             <div class="mb-4">
-              <h3 class="text-3xl md:text-4xl font-bold mb-2">Matias Leal Bazterrica</h3>
+              <h3 class="text-3xl md:text-4xl font-bold mb-2">{t(translations, 'team.matias.name')}</h3>
               <div class="flex items-center gap-3 flex-wrap">
-                <span class="text-lg font-semibold text-zinc-200">Sr. Backend Engineer</span>
+                <span class="text-lg font-semibold text-zinc-200">{t(translations, 'team.matias.title')}</span>
               </div>
             </div>
             
             <div class="mt-6 text-zinc-300 text-lg leading-relaxed">
-              <p class="text-zinc-400 mb-3">Building systems that scale.</p>
+              <p class="text-zinc-400 mb-3">{t(translations, 'team.matias.tagline')}</p>
               <p class="text-white text-2xl md:text-3xl font-semibold mb-3">
-                Passionate about high-performance architectures and solving complex technical challenges
+                {t(translations, 'team.matias.description')}
               </p>
               <p class="text-zinc-400">
-                Specialized in designing robust systems that power innovative products and deliver exceptional user experiences.
+                {t(translations, 'team.matias.bio')}
               </p>
             </div>
             
@@ -72,7 +71,7 @@ const badgeLabel = badgeMatch?.[2] ?? t(translations, 'header.about');
                 target="_blank" 
                 rel="noopener noreferrer"
                 class="group relative p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
-                aria-label="LinkedIn Profile"
+                aria-label={t(translations, 'team.social.linkedin')}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white group-hover:text-blue-400 transition-colors duration-300">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -83,7 +82,7 @@ const badgeLabel = badgeMatch?.[2] ?? t(translations, 'header.about');
                 target="_blank" 
                 rel="noopener noreferrer"
                 class="group relative p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
-                aria-label="X (Twitter) Profile"
+                aria-label={t(translations, 'team.social.twitter')}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white group-hover:text-zinc-300 transition-colors duration-300">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -99,25 +98,25 @@ const badgeLabel = badgeMatch?.[2] ?? t(translations, 'header.about');
           <div class="md:w-1/2" data-animate="fadeInRight">
             <img
               src={mariaSrc as string}
-              alt="María Renee Montano Torrico"
+              alt={t(translations, 'team.maria.alt')}
               class="w-full h-80 md:h-[28rem] object-cover rounded-xl grayscale transition-transform duration-300 hover-scale"
             />
           </div>
           <div class="md:w-1/2 text-white relative flex flex-col" data-animate="fadeInLeft">
             <div class="mb-4">
-              <h3 class="text-3xl md:text-4xl font-bold mb-2">María Renee Montano Torrico</h3>
+              <h3 class="text-3xl md:text-4xl font-bold mb-2">{t(translations, 'team.maria.name')}</h3>
               <div class="flex items-center gap-3 flex-wrap">
-                <span class="text-lg font-semibold text-zinc-200">Frontend Engineer</span>
+                <span class="text-lg font-semibold text-zinc-200">{t(translations, 'team.maria.title')}</span>
               </div>
             </div>
             
             <div class="mt-6 text-zinc-300 text-lg leading-relaxed">
-              <p class="text-zinc-400 mb-3">Building interfaces that connect.</p>
+              <p class="text-zinc-400 mb-3">{t(translations, 'team.maria.tagline')}</p>
               <p class="text-white text-2xl md:text-3xl font-semibold mb-3">
-                Focused on modern web technologies, scalable architectures, and delivering exceptional user experiences
+                {t(translations, 'team.maria.description')}
               </p>
               <p class="text-zinc-400">
-                Specialized in frontend development with expertise in building responsive, performant applications and implementing best practices in modern web development.
+                {t(translations, 'team.maria.bio')}
               </p>
             </div>
             
@@ -127,7 +126,7 @@ const badgeLabel = badgeMatch?.[2] ?? t(translations, 'header.about');
                 target="_blank" 
                 rel="noopener noreferrer"
                 class="group relative p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
-                aria-label="LinkedIn Profile"
+                aria-label={t(translations, 'team.social.linkedin')}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white group-hover:text-blue-400 transition-colors duration-300">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>

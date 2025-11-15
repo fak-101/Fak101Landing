@@ -74,5 +74,43 @@
     "terms": "Términos",
     "email": "Correo",
     "phone": "Teléfono"
+  },
+  "projects": {
+    "title": "Nuestro Trabajo",
+    "subtitle": "Una muestra de proyectos de los que estamos orgullosos.",
+    "alt": {
+      "ourWork": "Nuestro Trabajo",
+      "project": "Proyecto"
+    },
+    "aria": {
+      "previousSlide": "Diapositiva anterior",
+      "nextSlide": "Diapositiva siguiente"
+    }
+  },
+  "team": {
+    "matias": {
+      "name": "Matias Leal Bazterrica",
+      "title": "Ingeniero Backend Senior",
+      "tagline": "Construyendo sistemas que escalan.",
+      "description": "Apasionado por arquitecturas de alto rendimiento y resolver desafíos técnicos complejos",
+      "bio": "Especializado en diseñar sistemas robustos que impulsan productos innovadores y ofrecen experiencias de usuario excepcionales.",
+      "alt": "Matias Leal Bazterrica"
+    },
+    "maria": {
+      "name": "María Renee Montano Torrico",
+      "title": "Ingeniera Frontend",
+      "tagline": "Construyendo interfaces que conectan.",
+      "description": "Enfocada en tecnologías web modernas, arquitecturas escalables y ofrecer experiencias de usuario excepcionales",
+      "bio": "Especializada en desarrollo frontend con experiencia en construir aplicaciones responsivas y de alto rendimiento, implementando mejores prácticas en desarrollo web moderno.",
+      "alt": "María Renee Montano Torrico"
+    },
+    "social": {
+      "linkedin": "Perfil de LinkedIn",
+      "twitter": "Perfil de X (Twitter)"
+    }
+  },
+  "meta": {
+    "pageTitle": "FAK•101",
+    "brandName": "FAK 101"
   }
 }
